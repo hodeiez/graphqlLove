@@ -1,0 +1,21 @@
+spring:
+  r2dbc:
+    url:  ${DATABASE_URL_JDBC}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASS}
+    pool:
+      enabled: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog.yaml
+    url: ${DATABASE_URL_JDBC}
+    user: ${DATABASE_USER}
+    password: ${DATABASE_PASS}
+    default-schema: public
+    enabled: true
+    drop-first: false
+database:
+  name: ${DATABASE_NAME}
+  host: ${DATABASE_HOST}
+  port: ${DATABASE_PORT}
+  username: ${DATABASE_USER}
+  password: ${DATABASE_PASS}

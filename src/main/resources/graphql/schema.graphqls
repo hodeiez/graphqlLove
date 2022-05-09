@@ -1,0 +1,19 @@
+type Query{
+    getLoveById(id:ID):Love
+    getAllLove:[Love]
+}
+type Mutation{
+    addLove(loveInput:LoveInput!): Love
+    updateLove(id: ID, loveInput:LoveInput!):Love
+    deleteLoveById(id:ID):Love
+}
+type Love{
+    id:ID
+    amount: Int
+    type: String
+}
+
+input LoveInput {
+    amount: Int!
+    type: String!
+}
