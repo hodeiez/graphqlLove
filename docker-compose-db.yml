@@ -20,4 +20,4 @@ services :
     depends_on:
       - db
     ports:
-      - 5050:82
+      - 5050:80

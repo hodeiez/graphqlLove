@@ -1,3 +1,4 @@
+
 type Query{
     getLoveById(id:ID):Love
     getAllLove:[Love]
@@ -11,6 +12,7 @@ type Love{
     id:ID
     amount: Int
     type: String
+    createdDate:String
 }
 
 input LoveInput {

@@ -1,7 +1,6 @@
 package hodei.naiz.graphqllove.service;
 
 import hodei.naiz.graphqllove.model.Love;
-import hodei.naiz.graphqllove.model.LoveInput;
 import hodei.naiz.graphqllove.repos.LoveRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import reactor.core.publisher.Mono;
 public class LoveService {
     private final LoveRepo loveRepo;
 
-    public Mono<Love> addLove(LoveInput loveInput){
+    public Mono<Love> addLove(Love loveInput){
         return loveRepo.save(new Love(loveInput));
     }
     public Flux<Love> getAllLove(){
