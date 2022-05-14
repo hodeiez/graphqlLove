@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Accessors(chain=true)
 public class Love {
-    @JsonIgnore()
+    @JsonIgnore
     @Id
     private int id;
 
@@ -33,10 +33,10 @@ public class Love {
     private int amount;
     @JsonProperty("type")
     private String type;
-    @JsonIgnore()
+    @JsonIgnore
     @CreatedDate
     private LocalDateTime createdDate;
-    @JsonIgnore()
+    @JsonIgnore
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
