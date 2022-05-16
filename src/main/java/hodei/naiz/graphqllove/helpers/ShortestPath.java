@@ -2,10 +2,7 @@ package hodei.naiz.graphqllove.helpers;
 
 import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -21,26 +18,47 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public class ShortestPath {
     private Graph graph;
-    private boolean[] visited;
     private int[] distance;
-    private int[]path;
+    private HashMap<Integer,Set<Integer>> paths;
 
     public ShortestPath(Graph graph){
         this.graph = graph;
 
         distance= IntStream.range(0, graph.getAdjacentNodes().size()).map(i->i=Integer.MAX_VALUE).toArray();
         distance[0]=0;
-        visited=new boolean[graph.getAdjacentNodes().size()];
-        Arrays.fill(visited,false);
-    }
+        paths=new HashMap<Integer,Set<Integer>>();
 
+    }
+    private void calculateShortestPaths(){
+        graph.getAdjacentNodes().forEach(node-> node.forEach(d-> {
+            if (distance[d.getDestination()]>d.getWeight() && distance[d.getDestination()]>d.getWeight()+ distance[d.getSource()])
+            {
+
+                if(paths.get(d.getDestination())!=null){
+                    var list= paths.get(d.getDestination());
+                    list.add(d.getSource());
+                    paths.put(d.getDestination(),list);
+                }else {
+                    var list2=new HashSet();
+                    list2.add(d.getSource());
+                    paths.put(d.getDestination(), list2);
+                }
+                distance[d.getDestination()]=d.getWeight()+ distance[d.getSource()];
+
+            }}));
+
+
+    }
     public int[] findShortestFromTo(int source, int target) {
-        graph.getAdjacentNodes().forEach(node-> node.forEach(d-> {if (distance[d.getDestination()]>d.getWeight())
-        {
-            System.out.println(Arrays.toString(distance));
-            distance[d.getDestination()]=d.getWeight()+ distance[d.getSource()];
-        }}));
+        calculateShortestPaths();
+    dataPresentation();
         return distance;
+    }
+    private void dataPresentation(){
+        //System.out.println(paths.get(2));
+        paths.forEach((k,v)-> System.out.println(paths));
+        System.out.println(paths);
+        System.out.println(Arrays.toString(distance));
     }
 /**  shortest 3->16 [0,2,3] 2->6[0,2] 1->3[0,1]
  *        1
